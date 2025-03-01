@@ -16,6 +16,7 @@
             margin: 0;
             background-color: #f0f0f0;
             overflow: hidden; /* Отключает прокрутку */
+            touch-action: none; /* Отключает стандартные жесты */
         }
 
         /* Контейнер приложения */
@@ -68,6 +69,22 @@
             setTimeout(() => {
                 notification.textContent = '';
             }, 3000);
+        });
+
+        // Блокировка двойного нажатия и масштабирования
+        let lastTouchTime = 0;
+
+        document.addEventListener('touchstart', (event) => {
+            const now = new Date().getTime();
+            if (now - lastTouchTime < 300) { // Проверяем интервал между касаниями
+                event.preventDefault(); // Предотвращаем масштабирование
+            }
+            lastTouchTime = now;
+        });
+
+        // Блокировка pinch-to-zoom (жест приближения)
+        document.addEventListener('gesturestart', (event) => {
+            event.preventDefault();
         });
     </script>
 </body>
