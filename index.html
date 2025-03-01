@@ -2,169 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Запрещаем масштабирование -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title style="color: white;">Emoji Roulette</title>
+    <title>Emoji Roulette</title>
     <style>
-        /* Подключаем шрифт SFPRODISPLAYREGULAR.otf для основного текста */
-        @font-face {
-            font-family: 'SF Pro Display';
-            src: url('fonts/SFPRODISPLAYREGULAR.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* Подключаем шрифт SFPRODISPLAYBOLD.otf для кнопки */
-        @font-face {
-            font-family: 'SF Pro Display Bold';
-            src: url('fonts/SFPRODISPLAYBOLD.otf') format('opentype');
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        /* Используем шрифт SF Pro Display для всего приложения */
+        /* Основные стили */
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        /* Полная блокировка прокрутки и масштабирования */
-        html, body {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Отключает прокрутку */
-            height: 100%; /* Фиксирует высоту */
-            width: 100%; /* Фиксирует ширину */
-            touch-action: none; /* Отключает стандартные жесты */
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            touch-action: none;
             background-color: #000000;
-            position: fixed; /* Фиксируем страницу, чтобы избежать прокрутки */
-        }
-
-        /* Контейнер приложения */
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Занимает всю высоту экрана */
-            width: 100%; /* Занимает всю ширину экрана */
-            text-align: center;
-            position: fixed; /* Фиксируем контейнер */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        /* Стили для заголовка */
-        h1 {
-            color: white; /* Белый цвет текста */
-        }
-
-        /* Стили кнопки с использованием SFPRODISPLAYBOLD.otf */
-        button {
-            padding: 15px 30px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #ffffff;
-            color: rgb(0, 0, 0);
-            border: none;
-            border-radius: 25px; /* Кругловатые углы */
-            font-family: 'SF Pro Display Bold', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-weight: bold; /* Убедимся, что используется жирное начертание */
-        }
-
-        button:hover {
-            background-color: #ffffff;
-        }
-
-        /* Стили рулетки */
-        .roulette {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 48px;
-            margin: 20px 0;
-            width: 200px;
+        }
+
+        /* Контейнер рулетки */
+        .roulette-container {
+            width: 300px;
             height: 100px;
             border: 2px solid #ffffff;
             border-radius: 10px;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
         }
 
-        .roulette span {
+        /* Полоска рулетки */
+        .roulette-strip {
+            display: flex;
             position: absolute;
-            width: 100%;
-            text-align: center;
-            transition: transform 2s ease-out;
+            left: 0;
+            transition: left 5s ease-out; /* Анимация прокрутки */
         }
 
-        /* Стили уведомления */
+        /* Элементы рулетки */
+        .roulette-item {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: white;
+        }
+
+        /* Центральная полоска */
+        .center-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: red;
+            z-index: 2;
+        }
+
+        /* Кнопка Spin */
+        #spinButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        /* Уведомление */
         #notification {
             margin-top: 20px;
+            color: green;
+            font-size: 18px;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <h1>Emoji Roulette</h1> <!-- Белый текст -->
-        <div class="roulette">
-            <span id="emoji">🎰</span>
+    <div class="roulette-container">
+        <!-- Центральная полоска -->
+        <div class="center-line"></div>
+
+        <!-- Полоска рулетки -->
+        <div class="roulette-strip" id="rouletteStrip">
+            <!-- Элементы рулетки (эмодзи) -->
+            <div class="roulette-item">🍒</div>
+            <div class="roulette-item">🍋</div>
+            <div class="roulette-item">🍇</div>
+            <div class="roulette-item">🍉</div>
+            <div class="roulette-item">🍎</div>
+            <div class="roulette-item">🍓</div>
+            <div class="roulette-item">🍍</div>
+            <div class="roulette-item">🥝</div>
+            <div class="roulette-item">🍑</div>
+            <div class="roulette-item">🍌</div>
         </div>
-        <button id="spinButton">Spin</button> <!-- Кнопка с кругловатыми углами -->
-        <p id="notification" style="color: rgb(0, 206, 0);"></p>
+    </div>
+
+    <div style="text-align: center;">
+        <button id="spinButton">Spin</button>
+        <p id="notification"></p>
     </div>
 
     <script>
         // Получаем элементы DOM
+        const rouletteStrip = document.getElementById('rouletteStrip');
         const spinButton = document.getElementById('spinButton');
-        const emojiElement = document.getElementById('emoji');
         const notification = document.getElementById('notification');
 
-        // Массив эмодзи для рулетки
-        const emojis = ['🍒', '🍋', '🍇'];
+        // Массив эмодзи
+        const emojis = ['🍒', '🍋', '🍇', '🍉', '🍎', '🍓', '🍍', '🥝', '🍑', '🍌'];
+
+        // Ширина одного элемента рулетки
+        const itemWidth = 100;
 
         // Функция для запуска рулетки
         function spinRoulette() {
-            // Виброотклик (100 миллисекунд)
-            if (navigator.vibrate) {
-                navigator.vibrate(100); // Вибрация на 100 мс
-            }
+            // Генерируем случайное смещение для остановки
+            const randomOffset = Math.floor(Math.random() * emojis.length) * itemWidth;
 
             // Анимация прокрутки
-            let spins = 0;
-            const spinInterval = setInterval(() => {
-                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-                emojiElement.textContent = randomEmoji;
-                spins++;
-                if (spins > 10) { // Останавливаем после 10 прокруток
-                    clearInterval(spinInterval);
-                    const finalEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-                    emojiElement.textContent = finalEmoji;
-                    notification.textContent = `You got: ${finalEmoji}`;
-                    notification.style.color = 'green';
+            rouletteStrip.style.transition = 'left 5s ease-out';
+            rouletteStrip.style.left = `-${randomOffset}px`;
 
-                    // Очищаем уведомление через 3 секунды
-                    setTimeout(() => {
-                        notification.textContent = '';
-                    }, 3000);
-                }
-            }, 100);
+            // Определяем выигрышный эмодзи
+            setTimeout(() => {
+                const winningIndex = Math.abs(Math.floor(randomOffset / itemWidth)) % emojis.length;
+                const winningEmoji = emojis[winningIndex];
+                notification.textContent = `You won: ${winningEmoji}`;
+            }, 5000); // Сообщение появляется после завершения анимации
         }
 
         // Обработчик нажатия на кнопку
         spinButton.addEventListener('click', spinRoulette);
-
-        // Блокировка прокрутки через JavaScript
-        document.addEventListener('touchmove', (event) => {
-            event.preventDefault(); // Отключает скроллинг
-        });
-
-        // Блокировка масштабирования
-        document.addEventListener('gesturestart', (event) => {
-            event.preventDefault(); // Отключает жесты масштабирования
-        });
     </script>
 </body>
 </html>
