@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Emoji Roulette</title>
     <style>
+        /* Подключаем шрифт SFPRODISPLAYMEDIUM.OTF */
+        @font-face {
+            font-family: 'SF Pro Display Medium';
+            src: url('fonts/SFPRODISPLAYMEDIUM.OTF') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* Основные стили */
         body {
             margin: 0;
@@ -14,7 +22,7 @@
             width: 100%;
             touch-action: none;
             background-color: #000000;
-            font-family: Arial, sans-serif;
+            font-family: 'SF Pro Display Medium', Arial, sans-serif; /* Применяем шрифт */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -49,6 +57,7 @@
             align-items: center;
             font-size: 36px;
             color: white;
+            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; /* Стиль эмодзи как на iPhone */
         }
 
         /* Центральная полоска */
@@ -73,6 +82,7 @@
             border: none;
             border-radius: 25px;
             font-weight: bold;
+            font-family: 'SF Pro Display Medium', Arial, sans-serif; /* Применяем шрифт */
         }
 
         /* Уведомление */
@@ -81,6 +91,7 @@
             color: green;
             font-size: 18px;
             font-weight: bold;
+            font-family: 'SF Pro Display Medium', Arial, sans-serif; /* Применяем шрифт */
         }
     </style>
 </head>
