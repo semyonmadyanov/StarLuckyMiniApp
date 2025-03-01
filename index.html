@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Устанавливаем масштабирование для мобильных устройств -->
+    <!-- Запрещаем масштабирование -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Telegram Mini App</title>
     <style>
@@ -71,20 +71,9 @@
             }, 3000);
         });
 
-        // Блокировка двойного нажатия и масштабирования
-        let lastTouchTime = 0;
-
-        document.addEventListener('touchstart', (event) => {
-            const now = new Date().getTime();
-            if (now - lastTouchTime < 300) { // Проверяем интервал между касаниями
-                event.preventDefault(); // Предотвращаем масштабирование
-            }
-            lastTouchTime = now;
-        });
-
-        // Блокировка pinch-to-zoom (жест приближения)
+        // Дополнительная блокировка масштабирования
         document.addEventListener('gesturestart', (event) => {
-            event.preventDefault();
+            event.preventDefault(); // Отключает жесты масштабирования
         });
     </script>
 </body>
