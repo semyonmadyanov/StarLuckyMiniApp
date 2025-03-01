@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <!-- Запрещаем масштабирование -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title style="color: white;">Telegram Mini App</title>
+    <title style="color: white;">Emoji Roulette</title>
     <style>
         /* Подключаем шрифт SFPRODISPLAYREGULAR.otf для основного текста */
         @font-face {
@@ -77,6 +77,28 @@
             background-color: #ffffff;
         }
 
+        /* Стили рулетки */
+        .roulette {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            margin: 20px 0;
+            width: 200px;
+            height: 100px;
+            border: 2px solid #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .roulette span {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            transition: transform 2s ease-out;
+        }
+
         /* Стили уведомления */
         #notification {
             margin-top: 20px;
@@ -86,31 +108,53 @@
 </head>
 <body>
     <div class="app-container">
-        <h1>Telegram Mini App</h1> <!-- Белый текст -->
-        <button id="pressButton">Press</button> <!-- Кнопка с кругловатыми углами -->
+        <h1>Emoji Roulette</h1> <!-- Белый текст -->
+        <div class="roulette">
+            <span id="emoji">🎰</span>
+        </div>
+        <button id="spinButton">Spin</button> <!-- Кнопка с кругловатыми углами -->
         <p id="notification" style="color: rgb(0, 206, 0);"></p>
     </div>
 
     <script>
         // Получаем элементы DOM
-        const button = document.getElementById('pressButton');
+        const spinButton = document.getElementById('spinButton');
+        const emojiElement = document.getElementById('emoji');
         const notification = document.getElementById('notification');
 
-        // Обработчик нажатия на кнопку
-        button.addEventListener('click', () => {
+        // Массив эмодзи для рулетки
+        const emojis = ['🍒', '🍋', '🍇'];
+
+        // Функция для запуска рулетки
+        function spinRoulette() {
             // Виброотклик (100 миллисекунд)
             if (navigator.vibrate) {
                 navigator.vibrate(100); // Вибрация на 100 мс
             }
 
-            notification.textContent = 'You pressed the button';
-            notification.style.color = 'green';
+            // Анимация прокрутки
+            let spins = 0;
+            const spinInterval = setInterval(() => {
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                emojiElement.textContent = randomEmoji;
+                spins++;
+                if (spins > 10) { // Останавливаем после 10 прокруток
+                    clearInterval(spinInterval);
+                    const finalEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                    emojiElement.textContent = finalEmoji;
+                    notification.textContent = `You got: ${finalEmoji}`;
+                    notification.style.color = 'green';
 
-            // Очищаем уведомление через 3 секунды
-            setTimeout(() => {
-                notification.textContent = '';
-            }, 3000);
-        });
+                    // Очищаем уведомление через 3 секунды
+                    setTimeout(() => {
+                        notification.textContent = '';
+                    }, 3000);
+                }
+            }, 100);
+        }
+
+        // Обработчик нажатия на кнопку
+        spinButton.addEventListener('click', spinRoulette);
 
         // Блокировка прокрутки через JavaScript
         document.addEventListener('touchmove', (event) => {
