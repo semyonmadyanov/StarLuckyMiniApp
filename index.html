@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- Запрещаем масштабирование -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Telegram Mini App</title>
     <style>
         /* Полная блокировка прокрутки и масштабирования */
@@ -16,6 +16,7 @@
             width: 100%; /* Фиксирует ширину */
             touch-action: none; /* Отключает стандартные жесты */
             background-color: #f0f0f0;
+            position: fixed; /* Фиксируем страницу, чтобы избежать прокрутки */
         }
 
         /* Контейнер приложения */
@@ -27,6 +28,11 @@
             height: 100vh; /* Занимает всю высоту экрана */
             width: 100%; /* Занимает всю ширину экрана */
             text-align: center;
+            position: fixed; /* Фиксируем контейнер */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
 
         /* Стили кнопки */
