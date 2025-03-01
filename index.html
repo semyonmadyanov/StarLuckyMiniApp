@@ -6,24 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Telegram Mini App</title>
     <style>
-        /* Фиксированный фон и предотвращение прокрутки */
-        body {
+        /* Полная блокировка прокрутки и масштабирования */
+        html, body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Занимает всю высоту экрана */
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 0;
             overflow: hidden; /* Отключает прокрутку */
+            height: 100%; /* Фиксирует высоту */
+            width: 100%; /* Фиксирует ширину */
             touch-action: none; /* Отключает стандартные жесты */
+            background-color: #f0f0f0;
         }
 
         /* Контейнер приложения */
         .app-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Занимает всю высоту экрана */
+            width: 100%; /* Занимает всю ширину экрана */
             text-align: center;
-            width: 90%; /* Ограничиваем ширину контейнера */
-            max-width: 400px; /* Максимальная ширина для больших экранов */
         }
 
         /* Стили кнопки */
@@ -71,7 +74,12 @@
             }, 3000);
         });
 
-        // Дополнительная блокировка масштабирования
+        // Блокировка прокрутки через JavaScript
+        document.addEventListener('touchmove', (event) => {
+            event.preventDefault(); // Отключает скроллинг
+        });
+
+        // Блокировка масштабирования
         document.addEventListener('gesturestart', (event) => {
             event.preventDefault(); // Отключает жесты масштабирования
         });
