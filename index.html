@@ -71,6 +71,11 @@
 
         // Обработчик нажатия на кнопку
         button.addEventListener('click', () => {
+            // Виброотклик (100 миллисекунд)
+            if (navigator.vibrate) {
+                navigator.vibrate(100); // Вибрация на 100 мс
+            }
+
             notification.textContent = 'You pressed the button';
             notification.style.color = 'green';
 
