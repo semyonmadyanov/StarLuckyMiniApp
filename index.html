@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .app-container {
+            text-align: center;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0084ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <h1>Telegram Mini App</h1>
+        <button id="pressButton">Press</button>
+        <p id="notification" style="margin-top: 20px; font-weight: bold;"></p>
+    </div>
+
+    <script>
+        // Получаем элементы DOM
+        const button = document.getElementById('pressButton');
+        const notification = document.getElementById('notification');
+
+        // Обработчик нажатия на кнопку
+        button.addEventListener('click', () => {
+            notification.textContent = 'You pressed the button';
+            notification.style.color = 'green';
+
+            // Очищаем уведомление через 3 секунды
+            setTimeout(() => {
+                notification.textContent = '';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
