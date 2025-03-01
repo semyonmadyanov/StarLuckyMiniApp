@@ -2,21 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Устанавливаем масштабирование для мобильных устройств -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Telegram Mini App</title>
     <style>
+        /* Фиксированный фон и предотвращение прокрутки */
         body {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100vh; /* Занимает всю высоту экрана */
             margin: 0;
             background-color: #f0f0f0;
+            overflow: hidden; /* Отключает прокрутку */
         }
+
+        /* Контейнер приложения */
         .app-container {
             text-align: center;
+            width: 90%; /* Ограничиваем ширину контейнера */
+            max-width: 400px; /* Максимальная ширина для больших экранов */
         }
+
+        /* Стили кнопки */
         button {
             padding: 15px 30px;
             font-size: 16px;
@@ -26,8 +35,15 @@
             border: none;
             border-radius: 5px;
         }
+
         button:hover {
             background-color: #0056b3;
+        }
+
+        /* Стили уведомления */
+        #notification {
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -35,7 +51,7 @@
     <div class="app-container">
         <h1>Telegram Mini App</h1>
         <button id="pressButton">Press</button>
-        <p id="notification" style="margin-top: 20px; font-weight: bold;"></p>
+        <p id="notification" style="color: green;"></p>
     </div>
 
     <script>
