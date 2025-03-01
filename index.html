@@ -9,7 +9,7 @@
         /* Подключаем шрифт SFPRODISPLAYREGULAR.otf */
         @font-face {
             font-family: 'SF Pro Display';
-            src: url('fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
+            src: url('fonts/SFPRODISPLAYREGULAR.OTF') format('opentype');
             font-weight: normal;
             font-style: normal;
         }
@@ -83,6 +83,10 @@
 
         // Обработчик нажатия на кнопку
         button.addEventListener('click', () => {
+            // Виброотклик (100 миллисекунд)
+            if (navigator.vibrate) {
+                navigator.vibrate(100); // Вибрация на 100 мс
+            }
 
             notification.textContent = 'You pressed the button';
             notification.style.color = 'green';
