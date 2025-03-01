@@ -6,9 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Telegram Mini App</title>
     <style>
+        /* Подключаем шрифт SFPRODISPLAYREGULAR.otf */
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('fonts/SFPRODISPLAYREGULAR.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Используем шрифт SF Pro Display для всего приложения */
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
         /* Полная блокировка прокрутки и масштабирования */
         html, body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow: hidden; /* Отключает прокрутку */
@@ -59,7 +71,7 @@
 </head>
 <body>
     <div class="app-container">
-        <h1 font="Arial">Telegram Mini App</h1>
+        <h1>Telegram Mini App</h1>
         <button id="pressButton">Press</button>
         <p id="notification" style="color: green;"></p>
     </div>
